@@ -29,17 +29,26 @@ Before running the project locally, make sure you have:
 
 Create a PostgreSQL database:
 
+```bash
 createdb equipment_tracker
+```
 
 Or using psql:
 
-psql postgres  
-CREATE DATABASE equipment_tracker;  
+```bash
+psql postgres
+```
+
+```sql
+CREATE DATABASE equipment_tracker;
 \q
+```
 
 Run the schema file to create the required tables:
 
+```bash
 psql equipment_tracker < database/schema.sql
+```
 
 ---
 
@@ -47,24 +56,30 @@ psql equipment_tracker < database/schema.sql
 
 Navigate to the backend directory:
 
+```bash
 cd backend
+```
 
 Install dependencies:
 
+```bash
 npm install
+```
 
-Create a .env file inside the backend directory:
+Create a `.env` file inside the backend directory:
 
-DATABASE_URL=postgresql://localhost:5432/equipment_tracker  
+```env
+DATABASE_URL=postgresql://localhost:5432/equipment_tracker
 PORT=3001
+```
 
 Start the backend server:
 
+```bash
 npm start
+```
 
-The backend will run at:
-
-http://localhost:3001
+The backend will run at: http://localhost:3001
 
 ---
 
@@ -72,19 +87,23 @@ http://localhost:3001
 
 Open a new terminal and navigate to the frontend directory:
 
+```bash
 cd frontend
+```
 
 Install dependencies:
 
+```bash
 npm install
+```
 
 Start the development server:
 
+```bash
 npm start
+```
 
-The frontend will be available at:
-
-http://localhost:3000
+The frontend will be available at: http://localhost:3000
 
 ---
 
@@ -126,31 +145,30 @@ Stage 1: Explicit Heuristic (First Pass)
 
 Certain well-known equipment terms are handled explicitly to restore commonly expected behavior.
 
-Term detected: press  
-Suggested type: Machine  
-Confidence: Medium  
-Reason: Detected equipment term
+| Term detected | Suggested type | Confidence | Reason                  |
+| ------------- | -------------- | ---------- | ----------------------- |
+| press         | Machine        | Medium     | Detected equipment term |
 
 If this stage produces a result, it is used immediately.
 
 Stage 2: General Inference Rules (Fallback)
 
-High confidence (exact type keyword present):
+**High confidence** (exact type keyword present):
 
-- machine → Machine
-- vessel → Vessel
-- tank → Tank
-- mixer → Mixer
+- `machine` → Machine
+- `vessel` → Vessel
+- `tank` → Tank
+- `mixer` → Mixer
 
-Medium confidence (related equipment terms):
+**Medium confidence** (related equipment terms):
 
-- agitator, stirrer, blender → Mixer
-- reactor, kettle, boiler → Vessel
-- pump, compressor, motor → Machine
-- storage, container, reservoir → Tank
-- chamber, autoclave → Vessel
+- `agitator`, `stirrer`, `blender` → Mixer
+- `reactor`, `kettle`, `boiler` → Vessel
+- `pump`, `compressor`, `motor` → Machine
+- `storage`, `container`, `reservoir` → Tank
+- `chamber`, `autoclave` → Vessel
 
-Low confidence:
+**Low confidence:**
 
 - If no rules match, no type is suggested and the user must select one manually.
 
