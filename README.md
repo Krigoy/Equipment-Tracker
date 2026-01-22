@@ -185,6 +185,7 @@ The final submitted value is fully controlled by the user.
 - The database schema has been applied before starting the backend
 - Equipment names are entered in English
 - This is a single-user local application with no authentication
+- Equipment names are assumed to be reasonably descriptive; if a name is ambiguous, the system intentionally defers to manual user selection.
 
 ---
 
