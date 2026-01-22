@@ -1,0 +1,235 @@
+.equipment-table-container {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.equipment-table-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.equipment-table-heading {
+  min-width: 0;
+}
+
+.equipment-table-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.equipment-table-helper {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.table-controls {
+  margin-bottom: 12px;
+}
+
+.search-filter-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.search-box,
+.filter-box {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-box label,
+.filter-box label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.search-box input,
+.filter-box select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--text);
+}
+
+.search-box input:focus,
+.filter-box select:focus {
+  outline: none;
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.equipment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  min-width: 600px;
+  table-layout: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.equipment-table th {
+  background-color: #f9fafb;
+  padding: 12px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+
+.equipment-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.equipment-table th.sortable:hover {
+  background-color: #f3f4f6;
+}
+
+.sort-indicator {
+  margin-left: 5px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.equipment-table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.equipment-table tbody tr:hover {
+  background-color: #fafafa;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.status-active {
+  background-color: #ecfdf3;
+  color: #027a48;
+  border-color: #abefc6;
+}
+
+.status-inactive {
+  background-color: #fef2f2;
+  color: #b42318;
+  border-color: #fecaca;
+}
+
+.status-under-maintenance {
+  background-color: #fffbeb;
+  color: #b54708;
+  border-color: #fed7aa;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 10px;
+  margin-right: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: #fff;
+  color: var(--text);
+}
+
+.edit-btn {
+  background: #fff;
+}
+
+.edit-btn:hover {
+  background: #f9fafb;
+}
+
+.delete-btn {
+  color: var(--danger);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.delete-btn:hover {
+  background: #fef2f2;
+}
+
+.no-results-cell {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .equipment-table-container {
+    padding: 16px;
+  }
+
+  .equipment-table-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .equipment-table-header .add-equipment-btn {
+    width: 100%;
+  }
+
+  .search-filter-group {
+    flex-direction: column;
+  }
+
+  .equipment-table {
+    font-size: 0.9rem;
+  }
+
+  .equipment-table th,
+  .equipment-table td {
+    padding: 8px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,84 @@
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.App-header {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  color: var(--text);
+  text-align: left;
+}
+
+.App-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.App-subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #7f1d1d;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.app-content {
+  padding: 0 20px;
+}
+
+.add-equipment-btn {
+  background-color: var(--primary);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-equipment-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .app-content {
+    padding: 0 10px;
+  }
+
+  .add-equipment-section {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .add-equipment-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
