@@ -13,6 +13,22 @@ Database: PostgreSQL
 
 ---
 
+## Architecture
+
+```
+frontend/ (React)  ──HTTP──▶  backend/ (Express)
+                                routes/equipmentRoutes.js      REST endpoints under /api/equipment
+                                controllers/equipmentController.js   request validation, HTTP status codes
+                                services/equipmentService.js   parameterised SQL queries
+                                services/inference/            pluggable type-suggestion provider
+                                db.js                          pg connection pool
+                              ──SQL──▶ PostgreSQL (database/schema.sql)
+```
+
+The type-suggestion logic sits behind a small provider interface (`InferenceProvider`), so the local rule-based version can be swapped for another implementation without changing the controllers.
+
+---
+
 ## Prerequisites
 
 Before running the project locally, make sure you have:
@@ -66,12 +82,18 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file inside the backend directory:
+Create a `.env` file from the example and adjust it if your database needs a username or password:
+
+```bash
+cp .env.example .env
+```
 
 ```env
 DATABASE_URL=postgresql://localhost:5432/equipment_tracker
 PORT=3001
 ```
+
+Keep `PORT=3001`: the React dev server uses port 3000.
 
 Start the backend server:
 
@@ -104,6 +126,19 @@ npm start
 ```
 
 The frontend will be available at: http://localhost:3000
+
+---
+
+## API
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/equipment` | List all equipment |
+| POST | `/api/equipment` | Create equipment (validated) |
+| PUT | `/api/equipment/:id` | Update equipment |
+| DELETE | `/api/equipment/:id` | Delete equipment |
+| POST | `/api/equipment/infer-type` | Suggest a type from an equipment name |
+| GET | `/health` | Health check |
 
 ---
 
