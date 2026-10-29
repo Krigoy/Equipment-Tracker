@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './EquipmentForm.css';
 import { inferType } from '../services/api';
 
@@ -8,6 +8,8 @@ function EquipmentForm({ equipment, onSubmit, onCancel }) {
     const [status, setStatus] = useState('Active');
     const [lastCleanedDate, setLastCleanedDate] = useState('');
     const [inferenceSuggestion, setInferenceSuggestion] = useState(null);
+    // Latest name typed, so a slow inference response for an older name is ignored.
+    const latestNameRef = useRef('');
 
     useEffect(() => {
         if (equipment) {
@@ -16,18 +18,11 @@ function EquipmentForm({ equipment, onSubmit, onCancel }) {
             setStatus(equipment.status || 'Active');
 
             // Convert ISO date string to YYYY-MM-DD format for date input
-            let dateValue = '';
-            if (equipment.last_cleaned_date) {
-                try {
-                    const date = new Date(equipment.last_cleaned_date);
-                    if (!isNaN(date.getTime())) {
-                        dateValue = date.toISOString().split('T')[0];
-                    }
-                } catch (e) {
-                    // If date is already in YYYY-MM-DD format, use it directly
-                    dateValue = equipment.last_cleaned_date.split('T')[0];
-                }
-            }
+            // The API returns DATE values as 'YYYY-MM-DD'; keep only the date part
+            // so the value never goes through a time-zone conversion.
+            const dateValue = equipment.last_cleaned_date
+                ? String(equipment.last_cleaned_date).slice(0, 10)
+                : '';
             setLastCleanedDate(dateValue);
             setInferenceSuggestion(null);
         } else {
@@ -42,11 +37,13 @@ function EquipmentForm({ equipment, onSubmit, onCancel }) {
     const handleNameChange = async (e) => {
         const newName = e.target.value;
         setName(newName);
+        latestNameRef.current = newName;
 
         // Attempt type inference only when adding new equipment (not editing)
         if (!equipment && newName.trim()) {
             try {
                 const inferenceResult = await inferType(newName);
+                if (latestNameRef.current !== newName) return;
                 setInferenceSuggestion(inferenceResult);
 
                 // Auto-fill type if inference is successful and not null

@@ -19,6 +19,8 @@ function App() {
 
   useEffect(() => {
     loadEquipment();
+    // Load once on mount; loadEquipment is also called after each change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadEquipment = async () => {

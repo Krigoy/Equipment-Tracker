@@ -54,7 +54,8 @@ async function createEquipment(req, res) {
     let inferredType = type;
     if (!inferredType) {
       const inferenceProvider = getInferenceProvider();
-      inferredType = inferenceProvider.inferType(name);
+      const suggestion = inferenceProvider.inferType(name);
+      inferredType = suggestion && suggestion.type;
     }
     
     // If still no type, return error (don't store incomplete records)

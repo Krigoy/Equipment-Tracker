@@ -146,7 +146,8 @@ function EquipmentTable({ equipment, onEdit, onDelete, onAddEquipment }) {
                                 const formatDate = (dateStr) => {
                                     if (!dateStr) return 'N/A';
                                     try {
-                                        const date = new Date(dateStr);
+                                        // Parse 'YYYY-MM-DD' as a local date so it isn't shown a day early.
+                                        const date = new Date(String(dateStr).slice(0, 10) + 'T00:00:00');
                                         return isNaN(date.getTime()) ? 'N/A' : date.toLocaleDateString();
                                     } catch (e) {
                                         return 'N/A';
